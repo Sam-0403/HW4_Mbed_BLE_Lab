@@ -29,7 +29,7 @@ HW4_Mbed_BLE_Lab
 ## On RaspberryPi
 待補
 
-# 程式碼
+# 程式架構
 * `HeartRateService.h`
     * HeartRateService  0x180D
         * hrmRate   0x2A37
@@ -40,6 +40,10 @@ HW4_Mbed_BLE_Lab
         * magYRate  0xA002
         * magZRate  0xA003
 * `main.cpp`
+
+# 運行結果
+在RPI上，會看到如下圖的結果。
+![report](./report.pdf)
 
 # 問題紀錄
 

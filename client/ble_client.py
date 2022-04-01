@@ -1,14 +1,11 @@
 from bluepy.btle import Peripheral, UUID
-from bluepy.btle import Scanner, DefaultDelegate, AssignedNumbers
+from bluepy.btle import Scanner, DefaultDelegate
 import struct
 INDIC_ON = struct.pack('BB', 0x02, 0x00)
 NOTIF_ON = struct.pack('BB', 0x01, 0x00)
 NOTIF_OFF = struct.pack('BB', 0x00, 0x00)
 
 # user configuration
-# DEVICE_NAME = "AQUOS V"
-# SERVICE_UUID = 0xfff0
-# CHAR_UUID = 0xfff4
 DEVICE_NAME = "Sam's Sensor"
 
 HEART_SERVICE_UUID = 0x180d
@@ -79,70 +76,14 @@ for dev in devices:
         else:
             print ("%s, %s" % (desc, value))
 
-# number = input('Enter your device number: ')
-# print('Device', number)
-# print(list(devices)[int(number)].addr)
-
 print ("Connecting...")
-# dev = Peripheral(list(devices)[int(number)].addr, 'random')
 dev = Peripheral(list(devices)[device_num].addr, 'random')
 
-# mode = input('Choose the mode: (1: default; else: custom)')
 try:
-    # if mode=="1":
-    #     print ("Services...")
-    #     for service in dev.services:
-    #         print (str(service))
-    #     print (str(dev.getServiceByUUID(UUID(SERVICE_UUID))))
-    #     ch = dev.getCharacteristics(uuid=UUID(CHAR_UUID))[0]    # writeHandle = ch.valHandle or ch.getHandle()
-    # else:
-    #     print ("Services...")
-    #     n = 0
-    #     services = dev.services
-    #     for service in services:
-    #         print (str(n)+": "+str(service))
-    #         n+=1
-    #     number = input('Enter your service number: ')
-    #     print('Service', number)
-    #     service_uuid = list(services)[int(number)].uuid
-    #     print(service_uuid)
-    #     service = dev.getServiceByUUID(UUID(service_uuid))
-    #     print (str(service))
-
-    #     print ("Characteristics...")
-    #     n = 0
-    #     characteristics = service.getCharacteristics()
-    #     for ch in characteristics:
-    #         print (str(n)+": "+str(ch))
-    #         n+=1
-    #     number = input('Enter your characteristic number: ')
-    #     print('Characteristic', number)
-    #     ch = list(characteristics)[int(number)]
-    #     print (str(ch))
-        
-    # #dev.writeCharacteristic(ch.valHandle, b"\x65\x66")     # Test writeCharacteristic
-    # desc = ch.getDescriptors(AssignedNumbers.client_characteristic_configuration)
-    # print('Do you want to set the CCCD to notification or indication mode?')
-    # notify_or_indicate = int(input('Please type 1 for notification, or type 2 for indication: '))
-    # one = 1
-    # two = 2
-    # if (notify_or_indicate == one): #notification
-    #     dev.writeCharacteristic(desc[0].handle, NOTIF_ON)
-    #     print('Successfully changed the CCCD to notification. Please check the Server Log page in the BLE-tool app.')
-    # elif (notify_or_indicate == two): #indication
-    #     dev.writeCharacteristic(desc[0].handle, INDIC_ON)
-    #     print('Successfully changed the CCCD to indication. Please chekc the Server Log page in the BLE-tool app.')
-    # else:
-    #     print('Wrong format, sorry. The CCCD remains unchanged.')
-    # #dev.writeCharacteristic(desc[0].handle, INDIC_ON)  # To Modify CCCD
-
-    # custom_service_handle_cccd = ch.valHandle + 1
-    # dev = dev.withDelegate(PeripheralDelegate(custom_service_handle_cccd))
 
     print ("Services...")
     for service in dev.services:
         print (str(service))
-    # print (str(dev.getServiceByUUID(UUID(SERVICE_UUID))))
     heart_service = dev.getServiceByUUID(HEART_SERVICE_UUID)
     ch_heartrate = dev.getCharacteristics(uuid=UUID(HEART_RATE_UUID))[0]
     ch_heartlocation = dev.getCharacteristics(uuid=UUID(HEART_LOCATION_UUID))[0]
@@ -156,18 +97,6 @@ try:
     print(str(ch_mag_y_rate.valHandle))
     print(str(ch_mag_z_rate.valHandle))
 
-    # ch = dev.getCharacteristics(uuid=UUID(CHAR_UUID))[0]    # writeHandle = ch.valHandle or ch.getHandle()
-
-    #dev.writeCharacteristic(ch.valHandle, b"\x65\x66")     # Test writeCharacteristic
-    # print('Do you want to set the CCCD to notification or indication mode?')
-    # dev.writeCharacteristic(desc[0].handle, NOTIF_ON)
-
-    # custom_service_handle_cccd = ch.valHandle + 1
-    # dev = dev.withDelegate(PeripheralDelegate(custom_service_handle_cccd))
-    # ch_heartrate_handle_cccd = ch_heartrate.valHandle + 1
-    # devH = dev.withDelegate(HeartRateDelegate(ch_heartrate))
-    # devH.writeCharacteristic(ch_heartrate_handle_cccd, NOTIF_ON)
-    # dev = dev.withDelegate(PeripheralDelegate(custom_service_handle_cccd))
     ch_heartrate_handle_cccd = ch_heartrate.valHandle + 1
     ch_mag_x_handle_cccd = ch_mag_x_rate.valHandle + 1
     ch_mag_y_handle_cccd = ch_mag_y_rate.valHandle + 1
@@ -196,10 +125,7 @@ try:
 
     while True:
         if dev.waitForNotifications(3.0):
-            #print("Notification, now:")
             continue
-        # if devH.waitForNotifications(3.0) or devX.waitForNotifications(3.0) or devY.waitForNotifications(3.0) or devZ.waitForNotifications(3.0):
-        #     continue
 
         print ("Waiting...")
     

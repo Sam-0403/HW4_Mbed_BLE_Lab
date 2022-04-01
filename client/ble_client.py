@@ -88,7 +88,7 @@ for dev in devices:
     for (adtype, desc, value) in dev.getScanData():
         if (value == DEVICE_NAME):
             print('/////////////////////////////////////////////////////////////////')
-            print('HERE IS THE NAME OF YOUR PHONE DEVICE:')
+            print('HERE IS THE NAME OF YOUR DEVICE:')
             print ("%s, %s" % (desc, value))
             print('/////////////////////////////////////////////////////////////////')
         else:
@@ -101,7 +101,7 @@ print(list(devices)[int(number)].addr)
 print ("Connecting...")
 dev = Peripheral(list(devices)[int(number)].addr, 'random')
 
-mode = input('Choose the mode: (1: default; else: custom)')
+# mode = input('Choose the mode: (1: default; else: custom)')
 try:
     # if mode=="1":
     #     print ("Services...")
@@ -158,13 +158,13 @@ try:
         print (str(service))
     # print (str(dev.getServiceByUUID(UUID(SERVICE_UUID))))
     heart_service = dev.getServiceByUUID(HEART_SERVICE_UUID)
-    ch_heartrate = heart_service.getCharacteristics(uuid=UUID(HEART_RATE_UUID))[0]
-    ch_heartlocation = heart_service.getCharacteristics(uuid=UUID(HEART_LOCATION_UUID))[0]
+    ch_heartrate = dev.getCharacteristics(uuid=UUID(HEART_RATE_UUID))[0]
+    ch_heartlocation = dev.getCharacteristics(uuid=UUID(HEART_LOCATION_UUID))[0]
 
     mag_service = dev.getServiceByUUID(MAG_SERVICE_UUID)
-    ch_mag_x_rate = mag_service.getCharacteristics(uuid=MAG_X_RATE_UUID)[0]
-    ch_mag_y_rate = mag_service.getCharacteristics(uuid=MAG_Y_RATE_UUID)[0]
-    ch_mag_z_rate = mag_service.getCharacteristics(uuid=MAG_Z_RATE_UUID)[0]
+    ch_mag_x_rate = dev.getCharacteristics(uuid=MAG_X_RATE_UUID)[0]
+    ch_mag_y_rate = dev.getCharacteristics(uuid=MAG_Y_RATE_UUID)[0]
+    ch_mag_z_rate = dev.getCharacteristics(uuid=MAG_Z_RATE_UUID)[0]
 
     # ch = dev.getCharacteristics(uuid=UUID(CHAR_UUID))[0]    # writeHandle = ch.valHandle or ch.getHandle()
 

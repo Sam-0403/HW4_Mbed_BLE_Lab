@@ -165,32 +165,36 @@ try:
 
     # custom_service_handle_cccd = ch.valHandle + 1
     # dev = dev.withDelegate(PeripheralDelegate(custom_service_handle_cccd))
+    # ch_heartrate_handle_cccd = ch_heartrate.valHandle + 1
+    # devH = dev.withDelegate(HeartRateDelegate(ch_heartrate))
+    # devH.writeCharacteristic(ch_heartrate_handle_cccd, NOTIF_ON)
+    # dev = dev.withDelegate(PeripheralDelegate(custom_service_handle_cccd))
     ch_heartrate_handle_cccd = ch_heartrate.valHandle + 1
-    devH = dev.withDelegate(HeartRateDelegate(ch_heartrate))
-    devH.writeCharacteristic(ch_heartrate_handle_cccd, NOTIF_ON)
+    dev = dev.withDelegate(PeripheralDelegate(ch_heartrate_handle_cccd))
+    dev.writeCharacteristic(ch_heartrate_handle_cccd, NOTIF_ON)
 
-    # ch_heartlocation_handle_cccd = ch_heartlocation.valHandle + 1
-    # dev = dev.withDelegate(PeripheralDelegate(ch_heartlocation_handle_cccd))
+    # # ch_heartlocation_handle_cccd = ch_heartlocation.valHandle + 1
+    # # dev = dev.withDelegate(PeripheralDelegate(ch_heartlocation_handle_cccd))
 
-    ch_mag_x_handle_cccd = ch_mag_x_rate.valHandle + 1
-    devX = dev.withDelegate(MagXRateDelegate(ch_mag_x_rate))
-    devX.writeCharacteristic(ch_mag_x_handle_cccd, NOTIF_ON)
+    # ch_mag_x_handle_cccd = ch_mag_x_rate.valHandle + 1
+    # devX = dev.withDelegate(MagXRateDelegate(ch_mag_x_rate))
+    # devX.writeCharacteristic(ch_mag_x_handle_cccd, NOTIF_ON)
 
 
-    ch_mag_y_handle_cccd = ch_mag_y_rate.valHandle + 1
-    devY = dev.withDelegate(MagYRateDelegate(ch_mag_y_rate))
-    devY.writeCharacteristic(ch_mag_y_handle_cccd, NOTIF_ON)
+    # ch_mag_y_handle_cccd = ch_mag_y_rate.valHandle + 1
+    # devY = dev.withDelegate(MagYRateDelegate(ch_mag_y_rate))
+    # devY.writeCharacteristic(ch_mag_y_handle_cccd, NOTIF_ON)
 
-    ch_mag_z_handle_cccd = ch_mag_z_rate.valHandle + 1
-    devZ = dev.withDelegate(MagZRateDelegate(ch_mag_z_rate))
-    devZ.writeCharacteristic(ch_mag_z_handle_cccd, NOTIF_ON)
+    # ch_mag_z_handle_cccd = ch_mag_z_rate.valHandle + 1
+    # devZ = dev.withDelegate(MagZRateDelegate(ch_mag_z_rate))
+    # devZ.writeCharacteristic(ch_mag_z_handle_cccd, NOTIF_ON)
 
     while True:
-        # if devH.waitForNotifications(3.0):
-        #     #print("Notification, now:")
-        #     continue
-        if devH.waitForNotifications(3.0) or devX.waitForNotifications(3.0) or devY.waitForNotifications(3.0) or devZ.waitForNotifications(3.0):
+        if dev.waitForNotifications(3.0):
+            #print("Notification, now:")
             continue
+        # if devH.waitForNotifications(3.0) or devX.waitForNotifications(3.0) or devY.waitForNotifications(3.0) or devZ.waitForNotifications(3.0):
+        #     continue
 
         print ("Waiting...")
     

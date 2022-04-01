@@ -43,7 +43,8 @@ HW4_Mbed_BLE_Lab
 
 # 運行結果
 在RPI上，會看到如下圖的結果。
-![report](./report.pdf)
+
+![report](./report.jpg)
 
 # 問題紀錄
 

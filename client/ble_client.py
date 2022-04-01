@@ -24,6 +24,7 @@ MAG_Z_RATE_UUID = 0xa003
 
 def dataParsing(data, type):
     data_list = list(data)
+    print(data_list)
     if data_list[0]==0:
         final_data = int(data_list[2])*256+int(data_list[1])
         print("Data: ", final_data)

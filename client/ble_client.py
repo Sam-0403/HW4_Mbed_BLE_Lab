@@ -170,6 +170,10 @@ try:
     ch_mag_y_rate = dev.getCharacteristics(uuid=MAG_Y_RATE_UUID)[0]
     ch_mag_z_rate = dev.getCharacteristics(uuid=MAG_Z_RATE_UUID)[0]
 
+    print(str(ch_mag_x_rate))
+    print(str(ch_mag_y_rate))
+    print(str(ch_mag_z_rate))
+
     # ch = dev.getCharacteristics(uuid=UUID(CHAR_UUID))[0]    # writeHandle = ch.valHandle or ch.getHandle()
 
     #dev.writeCharacteristic(ch.valHandle, b"\x65\x66")     # Test writeCharacteristic

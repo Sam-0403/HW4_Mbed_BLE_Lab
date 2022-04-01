@@ -23,13 +23,13 @@ def dataParsing(data):
     data_list = list(data)
     print(data_list)
     if data_list[3]==1:
-        print("HeartRate: ")
+        print("//--HeartRate--//")
     elif data_list[3]==2:
-        print("MagXRate: ")
+        print("//--MagXRate--//")
     elif data_list[3]==3:
-        print("MagYRate: ")
+        print("//--MagYRate--//")
     elif data_list[3]==4:
-        print("MagZRate: ")
+        print("//--MagZRate--//")
 
     if data_list[0]==0:
         final_data = int(data_list[2])*256+int(data_list[1])

@@ -169,8 +169,14 @@ try:
     # devH.writeCharacteristic(ch_heartrate_handle_cccd, NOTIF_ON)
     # dev = dev.withDelegate(PeripheralDelegate(custom_service_handle_cccd))
     ch_heartrate_handle_cccd = ch_heartrate.valHandle + 1
+    ch_mag_x_handle_cccd = ch_mag_x_rate.valHandle + 1
+    ch_mag_y_handle_cccd = ch_mag_y_rate.valHandle + 1
+    ch_mag_z_handle_cccd = ch_mag_z_rate.valHandle + 1
     dev = dev.withDelegate(PeripheralDelegate(ch_heartrate_handle_cccd))
     dev.writeCharacteristic(ch_heartrate_handle_cccd, NOTIF_ON)
+    dev.writeCharacteristic(ch_mag_x_handle_cccd, NOTIF_ON)
+    dev.writeCharacteristic(ch_mag_y_handle_cccd, NOTIF_ON)
+    dev.writeCharacteristic(ch_mag_z_handle_cccd, NOTIF_ON)
 
     # # ch_heartlocation_handle_cccd = ch_heartlocation.valHandle + 1
     # # dev = dev.withDelegate(PeripheralDelegate(ch_heartlocation_handle_cccd))

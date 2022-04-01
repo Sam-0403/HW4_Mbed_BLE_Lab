@@ -22,15 +22,24 @@ MAG_Z_RATE_UUID = 0xa003
 
 # DefaultDelegate: to receive Bluetooth message asynchronously
 
-def dataParsing(data, type):
+def dataParsing(data):
     data_list = list(data)
     print(data_list)
+    if data_list[3]==1:
+        print("HeartRate: ")
+    elif data_list[3]==2:
+        print("MagXRate: ")
+    elif data_list[3]==3:
+        print("MagYRate: ")
+    elif data_list[3]==4:
+        print("MagZRate: ")
+
     if data_list[0]==0:
         final_data = int(data_list[2])*256+int(data_list[1])
         print("Data: ", final_data)
     elif data_list[0]==1:
         final_data = int(data_list[2])*256+int(data_list[1])-65536
-        print(type, ": ", final_data)
+        print("Data: ", final_data)
 
 # ScanDelegate: to scan for BLE devices which are broadcasting data
 class ScanDelegate(DefaultDelegate):
@@ -43,7 +52,7 @@ class ScanDelegate(DefaultDelegate):
             print("Received new data from", dev.addr)
 
 # PeripheralDelegate: to handle notification from BLE server
-class HeartRateDelegate(DefaultDelegate):
+class PeripheralDelegate(DefaultDelegate):
     def __init__(self, handle):
         DefaultDelegate.__init__(self)
         #print("handleNotification init")
@@ -51,37 +60,7 @@ class HeartRateDelegate(DefaultDelegate):
 
     def handleNotification(self, cHandle, data):
         if cHandle==self.hndl:
-            dataParsing(data, "HeartRate")
-
-class MagXRateDelegate(DefaultDelegate):
-    def __init__(self, handle):
-        DefaultDelegate.__init__(self)
-        #print("handleNotification init")
-        self.hndl = handle
-
-    def handleNotification(self, cHandle, data):
-        if cHandle==self.hndl:
-            dataParsing(data, "Magneto X")
-
-class MagYRateDelegate(DefaultDelegate):
-    def __init__(self, handle):
-        DefaultDelegate.__init__(self)
-        #print("handleNotification init")
-        self.hndl = handle
-
-    def handleNotification(self, cHandle, data):
-        if cHandle==self.hndl:
-            dataParsing(data, "Magneto Y")
-
-class MagZRateDelegate(DefaultDelegate):
-    def __init__(self, handle):
-        DefaultDelegate.__init__(self)
-        #print("handleNotification init")
-        self.hndl = handle
-
-    def handleNotification(self, cHandle, data):
-        if cHandle==self.hndl:
-            dataParsing(data, "Magneto Z")
+            dataParsing(data)
 
 # withDelegate: to stores a reference to a delegate object, which receives callbacks when broadcasts from devices are received
 scanner = Scanner().withDelegate(ScanDelegate()) 

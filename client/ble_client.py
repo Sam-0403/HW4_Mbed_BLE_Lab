@@ -50,7 +50,8 @@ class HeartRateDelegate(DefaultDelegate):
         self.hndl = handle
 
     def handleNotification(self, cHandle, data):
-        dataParsing(data, "HeartRate")
+        if cHandle==self.hndl:
+            dataParsing(data, "HeartRate")
 
 class MagXRateDelegate(DefaultDelegate):
     def __init__(self, handle):
@@ -59,7 +60,8 @@ class MagXRateDelegate(DefaultDelegate):
         self.hndl = handle
 
     def handleNotification(self, cHandle, data):
-        dataParsing(data, "Magneto X")
+        if cHandle==self.hndl:
+            dataParsing(data, "Magneto X")
 
 class MagYRateDelegate(DefaultDelegate):
     def __init__(self, handle):
@@ -68,7 +70,8 @@ class MagYRateDelegate(DefaultDelegate):
         self.hndl = handle
 
     def handleNotification(self, cHandle, data):
-        dataParsing(data, "Magneto Y")
+        if cHandle==self.hndl:
+            dataParsing(data, "Magneto Y")
 
 class MagZRateDelegate(DefaultDelegate):
     def __init__(self, handle):
@@ -77,7 +80,8 @@ class MagZRateDelegate(DefaultDelegate):
         self.hndl = handle
 
     def handleNotification(self, cHandle, data):
-        dataParsing(data, "Magneto Z")
+        if cHandle==self.hndl:
+            dataParsing(data, "Magneto Z")
 
 # withDelegate: to stores a reference to a delegate object, which receives callbacks when broadcasts from devices are received
 scanner = Scanner().withDelegate(ScanDelegate()) 

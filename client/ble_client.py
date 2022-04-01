@@ -59,8 +59,7 @@ class PeripheralDelegate(DefaultDelegate):
         self.hndl = handle
 
     def handleNotification(self, cHandle, data):
-        if cHandle==self.hndl:
-            dataParsing(data)
+        dataParsing(data)
 
 # withDelegate: to stores a reference to a delegate object, which receives callbacks when broadcasts from devices are received
 scanner = Scanner().withDelegate(ScanDelegate()) 

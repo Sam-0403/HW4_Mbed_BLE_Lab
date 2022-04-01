@@ -21,7 +21,6 @@ MAG_Z_RATE_UUID = 0xa003
 
 def dataParsing(data):
     data_list = list(data)
-    print(data_list)
     if data_list[3]==1:
         print("//--HeartRate--//")
     elif data_list[3]==2:

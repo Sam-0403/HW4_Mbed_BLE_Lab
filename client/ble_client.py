@@ -82,6 +82,7 @@ class MagZRateDelegate(DefaultDelegate):
 scanner = Scanner().withDelegate(ScanDelegate()) 
 devices = scanner.scan(3.0)
 n = 0
+device_num = 0
 for dev in devices:
     print ("%d: Device %s (%s), RSSI=%d dB" % (n, dev.addr, dev.addrType, dev.rssi))
     n += 1
@@ -91,15 +92,17 @@ for dev in devices:
             print('HERE IS THE NAME OF YOUR DEVICE:')
             print ("%s, %s" % (desc, value))
             print('/////////////////////////////////////////////////////////////////')
+            device_num = n-1
         else:
             print ("%s, %s" % (desc, value))
 
-number = input('Enter your device number: ')
-print('Device', number)
-print(list(devices)[int(number)].addr)
+# number = input('Enter your device number: ')
+# print('Device', number)
+# print(list(devices)[int(number)].addr)
 
 print ("Connecting...")
-dev = Peripheral(list(devices)[int(number)].addr, 'random')
+# dev = Peripheral(list(devices)[int(number)].addr, 'random')
+dev = Peripheral(list(devices)[device_num].addr, 'random')
 
 # mode = input('Choose the mode: (1: default; else: custom)')
 try:

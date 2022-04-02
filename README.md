@@ -25,9 +25,14 @@ HW4_Mbed_BLE_Lab
     }
 }
 ```
+* Put the files under `./server` into `mbed-os/connectivity/FEATURE_BLE/include/ble/services/`
 
 ## On RaspberryPi
-待補
+* Install Python3 and bluepy
+* `git clone https://github.com/Sam-0403/HW4_Mbed_BLE_Lab.git`
+* `cd ./client/ble_client.py`
+* Fix the UUID and device's name
+* Run it by Python3
 
 # 程式架構
 * `HeartRateService.h`
